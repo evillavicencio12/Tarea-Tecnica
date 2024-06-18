@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manejador de eventos</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        #coordenadas {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Antirrebote</h1>
+    <h2>Seguimiento de mouse por coordenadas</h2>
+    <div id="coordenadas"></div>
+    <script>
+        let programado = null;
+        let coordenadas = document.getElementById("coordenadas");
+        window.addEventListener("mousemove", evento => {
+            if (!programado) {
+                setTimeout(() => {
+                    coordenadas.textContent = `Mouse en ${evento.pageX}, ${evento.pageY}`;
+                    coordenadas.style.display = "block"; 
+                    programado = null;
+                }, 50);
+            }
+            programado = evento;
+        });
+        window.addEventListener("mouseout", () => {
+            coordenadas.style.display = "none";
+        });
+    </script>
+</body>
+</html>

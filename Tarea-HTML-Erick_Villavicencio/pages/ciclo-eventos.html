@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manejador de eventos</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Ciclo de eventos</h1>
+    <h2>Elevar al cubo</h2>
+    <label for="numero">Ingrese un número:</label>
+    <input type="number" id="numero" name="numero">
+    <button id="calcular">Calcular Cubo</button>
+    <div id="resultado"></div>
+
+    <script>
+    let cuadradoWorker = new Worker("cuadroworker.js");
+    let resultadoDiv = document.getElementById("resultado")
+    let inputNumero = document.getElementById("numero");
+    let btnCalcular = document.getElementById("calcular");
+    btnCalcular.addEventListener("click", () => {
+            let numero = parseInt(inputNumero.value);
+            cuadradoWorker.postMessage({ numero: numero });
+        });
+    cuadradoWorker.addEventListener("message", evento => {
+        let resultadoP = document.createElement("p");
+        resultadoP.textContent = `El cubo de ${event.data.numero} es: ${event.data.resultado}`;
+        resultadoDiv.appendChild(resultadoP);
+    });
+    </script>
+</body>
+</html>

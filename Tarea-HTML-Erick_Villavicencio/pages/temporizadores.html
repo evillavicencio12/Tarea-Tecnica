@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propagacion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+        .status {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Temporizadores</h1>
+        <p>Simulacion de un temporizador</p>
+        <div id="botones">
+            <button id="activar">Activar bomba</button>
+            <button id="desactivar">Desactivar bomba</button>
+        </div>
+        <div id="estado" class="status">Estado del temporizador: <span id="estado-temporizador">Inactivo</span></span></div>
+    </div>
+    <script>
+        let temporizadorBomba;
+        let estadoTemporizador = document.getElementById("estado-temporizador");
+
+        function iniciarTemporizador() {
+            temporizadorBomba = setTimeout(() => {
+                estadoTemporizador.textContent = "¡BOOM!";
+                console.log("¡BOOM!");
+            }, 2000);
+            estadoTemporizador.textContent = "Activado";
+            console.log("Temporizador activado.");
+        }
+
+        function detenerTemporizador() {
+            clearTimeout(temporizadorBomba);
+            estadoTemporizador.textContent = "Detenido";
+            console.log("Temporizador detenido.");
+        }
+
+        document.getElementById("activar").addEventListener("click", iniciarTemporizador);
+        document.getElementById("desactivar").addEventListener("click", detenerTemporizador);
+    </script>
+</body>
+</html>

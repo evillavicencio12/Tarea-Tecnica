@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manejador de eventos</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        #mensaje {
+            font-size: 18px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Antirrebote</h1>
+    <textarea id="areaTexto"></textarea>
+    <div id="mensaje"></div>
+    <script>
+        let areaTexto = document.getElementById("areaTexto");
+        let mensaje = document.getElementById("mensaje")
+        let tiempoEspera;
+    areaTexto.addEventListener("input", () => {
+    clearTimeout(tiempoEspera);
+    tiempoEspera = setTimeout(() =>{
+       mensaje.textContent="Has escrito"
+    }, 1500);
+    });
+</script>
+</body>
+</html>

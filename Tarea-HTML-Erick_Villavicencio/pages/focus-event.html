@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manejador de eventos</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Eventos de foco</h1>
+    <h2>Al hacer click muestra una descripcion de lo que debe poner</h2>
+        <p>Nombre: <input type="text" dato-ayuda="Tu nombre"></p>
+        <p>Edad: <input type="text" dato-ayuda="Tu edad en años"></p>
+        <p>Año de nacimiento: <input type="text" dato-ayuda="Año de nacimiento"></p>
+        <p>Mes de nacimiento: <input type="text" dato-ayuda="Mes de nacimiento"></p>
+        <p>Dia de nacimiento: <input type="text" dato-ayuda="Dia en el que naciste"></p>
+        <p id="ayuda"></p>
+        <p id="resultado"></p>
+    <script>
+            let ayuda = document.querySelector("#ayuda");
+            let resultado = document.querySelector("#resultado");
+            let campos = document.querySelectorAll("input");
+
+            for (let campo of campos) {
+                campo.addEventListener("focus", evento => {
+                    let texto = evento.target.getAttribute("dato-ayuda");
+                    ayuda.textContent = texto;
+                });
+
+                campo.addEventListener("blur", evento => {
+                    ayuda.textContent = "";
+                    actualizarResultado();
+                });
+            }
+            function actualizarResultado() {
+                let nombre = document.querySelector("#nombre").value;
+                let edad = document.querySelector("#edad").value;
+                resultado.textContent = `Nombre: ${nombre}, Edad: ${edad}`;
+            }
+    </script>
+</body>
+</html>
